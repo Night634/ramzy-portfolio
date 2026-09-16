@@ -1,0 +1,141 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Profile {
+  id             String   @id @default(cuid())
+  name           String
+  title          String
+  introduction   String
+  profileImage   String   @map("profile_image")
+  about          String   @db.Text
+  education      String
+  focus          String
+  additionalInfo String?  @map("additional_info") @db.Text
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  @@map("profile")
+}
+
+model Portfolio {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  role        String?  // e.g. Full Stack Developer
+  year        String?  // e.g. 2024
+  projectType String?  // e.g. Personal Project / Client Project
+  thumbnail   String
+  description String?  // Overview
+  challenges  String?  // Challenges
+  solution    String?  // Solution
+  keyFeatures String?  // Key Features (pisahkan dengan enter/newline)
+  result      String?  // Result
+  liveUrl     String?  // Live Website
+  githubUrl   String?  // Github
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  stacks      PortfolioStack[]
+  images      PortfolioImage[]
+
+  @@map("portfolios")
+}
+
+model Stack {
+  id          String           @id @default(cuid())
+  name        String
+  icon        String?
+  category    String?
+  description String?          @db.Text
+  createdAt   DateTime         @default(now()) @map("created_at")
+  portfolios  PortfolioStack[]
+
+  @@map("stacks")
+}
+
+model PortfolioStack {
+  portfolioId String    @map("portfolio_id")
+  stackId     String    @map("stack_id")
+  portfolio   Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+  stack       Stack     @relation(fields: [stackId], references: [id], onDelete: Cascade)
+
+  @@id([portfolioId, stackId])
+  @@map("portfolio_stack")
+}
+
+model PortfolioImage {
+  id          String    @id @default(cuid())
+  portfolioId String    @map("portfolio_id")
+  imageUrl    String    @map("image_url")
+  portfolio   Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+
+  @@map("portfolio_images")
+}
+
+model User {
+  id            String    @id
+  name          String
+  email         String
+  emailVerified Boolean   @default(false)
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  sessions      Session[]
+  accounts      Account[]
+
+  @@unique([email])
+  @@map("user")
+}
+
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  token     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([token])
+  @@index([userId])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@index([userId])
+  @@map("account")
+}
+
+model Verification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([identifier])
+  @@map("verification")
+}

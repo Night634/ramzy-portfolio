@@ -1,0 +1,22 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "/^cd \"c:\\\\Users\\\\Ramzy Atchallah\\\\ramzy-portofolio\"; node -e \"console\\.log\\(require\\.resolve\\('lucide-react'\\)\\); console\\.log\\(require\\.resolve\\('motion'\\)\\); console\\.log\\(require\\.resolve\\('framer-motion'\\)\\);\"$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^cd \"c:\\\\Users\\\\Ramzy Atchallah\\\\ramzy-portofolio\"; node -e \"const lucide=require\\('lucide-react'\\); console\\.log\\(Object\\.keys\\(lucide\\)\\.filter\\(k => /Git\\|Linked\\|Insta\\|Github\\|Linkedin\\|Instagram/\\.test\\(k\\)\\)\\.sort\\(\\)\\.slice\\(0,80\\)\\); console\\.log\\('Github type', typeof lucide\\.Github, 'Linkedin type', typeof lucide\\.Linkedin, 'Instagram type', typeof lucide\\.Instagram\\);\"$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^cd \"c:\\\\Users\\\\Ramzy Atchallah\\\\ramzy-portofolio\"; node -e \"const lucide=require\\('lucide-react'\\); console\\.log\\(Object\\.keys\\(lucide\\)\\.filter\\(k => /Git\\|Linked\\|Insta\\|Github\\|Linkedin\\|Instagram/\\.test\\(k\\)\\)\\.sort\\(\\)\\); console\\.log\\('Github type', typeof lucide\\.Github, 'Linkedin type', typeof lucide\\.Linkedin, 'Instagram type', typeof lucide\\.Instagram\\);\"$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^cd \"c:\\\\Users\\\\Ramzy Atchallah\\\\ramzy-portofolio\"; node -e \"const mod=require\\('motion'\\); console\\.log\\(Object\\.keys\\(mod\\)\\.slice\\(0,80\\)\\); const framer=require\\('framer-motion'\\); console\\.log\\('framer keys', Object\\.keys\\(framer\\)\\.slice\\(0,80\\)\\);\"$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "npx tsc": true,
+        "npx eslint": true
+    }
+}
