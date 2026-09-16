@@ -1,7 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  experimental: {
+    serverActions: {
+      bodySizeLimit: "10mb", // Mengubah limit unggah gambar menjadi 10 Megabyte
+    },
+  },
 };
 
 export default nextConfig;
