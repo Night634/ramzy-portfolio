@@ -147,7 +147,7 @@ export default function PortfolioClient({ profile, portfolios, stacks }: Portfol
       <nav className="fixed top-4 left-0 right-0 z-50 px-6">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <Link href="/" className="text-xl font-bold tracking-tight text-white group">
-            {profile?.name ? profile.name.split(' ')[0] : 'Ramzy'}
+            {profile?.name ? profile.name.split(' ')[0] : 'Ramzy Portfolio'}
             <span className="text-blue-500 group-hover:text-cyan-400 transition-colors duration-300">.</span>
           </Link>
 
